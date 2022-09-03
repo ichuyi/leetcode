@@ -40,9 +40,3 @@ func partition(head *ListNode, x int) *ListNode {
 	}
 	return root
 }
-
-// func main() {
-// 	root := getLinkedList([]int{1, 2, 3})
-// 	root = partition(root, 4)
-// 	printLinkedList(root)
-// }

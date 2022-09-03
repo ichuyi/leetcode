@@ -21,9 +21,3 @@ func reverseList2(head *ListNode) *ListNode {
 	}
 	return last
 }
-
-// func main() {
-// 	root := getLinkedList([]int{1, 2, 3, 4, 5})
-// 	root = reverseList2(root)
-// 	printLinkedList(root)
-// }

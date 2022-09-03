@@ -74,8 +74,3 @@ func copyRandomList2(head *ListNode) *ListNode {
 	printLinkedList(head)
 	return root
 }
-
-// func main() {
-// 	root := getLinkedList([]int{1, 2, 3})
-// 	copyRandomList2(root)
-// }

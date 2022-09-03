@@ -21,9 +21,3 @@ func isValid(s string) bool {
 	}
 	return cur == -1
 }
-
-// func main() {
-// 	fmt.Println(isValid("([])"))
-// 	fmt.Println(isValid("()[]"))
-// 	fmt.Println(isValid("(]"))
-// }
