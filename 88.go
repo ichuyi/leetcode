@@ -1,6 +1,6 @@
 package main
 
-func merge(nums1 []int, m int, nums2 []int, n int) {
+func merge88(nums1 []int, m int, nums2 []int, n int) {
 	index1, index2 := m-1, n-1
 	for index := m + n - 1; index >= 0; index-- {
 		var t int
