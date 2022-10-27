@@ -1,33 +1,33 @@
 package main
 
 func reverseBetween(head *ListNode, left int, right int) *ListNode {
-	if head == nil {
-		return head
+	root := &ListNode{Next: head}
+	start := root
+	last := root
+	for i := 1; i <= left; i++ {
+		last = start
+		start = start.Next
 	}
-	var leftStart, leftEnd, midStart *ListNode
-	if left > 1 {
-		leftStart, leftEnd = head, head
-		for i := 1; i < left-1; i++ {
-			leftEnd = leftEnd.Next
-		}
-		midStart = leftEnd.Next
-	} else {
-		midStart = head
+	end := start
+	for j := left + 1; j <= right; j++ {
+		end = end.Next
 	}
-	midEnd := midStart
-	var last *ListNode
-	var next *ListNode
-	for i := left; i <= right; i++ {
-		next = midStart.Next
-		midStart.Next = last
-		last = midStart
-		midStart = next
-	}
-	if leftEnd != nil {
-		leftEnd.Next = last
-	} else {
-		leftStart = last
-	}
+	next := end.Next
+	end.Next = nil
+	midStart, midEnd := reverse(start)
+	last.Next = midStart
 	midEnd.Next = next
-	return leftStart
+	return root.Next
+}
+func reverse(root *ListNode) (*ListNode, *ListNode) {
+	start := root
+	var current *ListNode
+	last := root
+	for current = root.Next; current != nil; {
+		n := current.Next
+		current.Next = last
+		last = current
+		current = n
+	}
+	return last, start
 }
