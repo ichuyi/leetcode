@@ -1,22 +1,18 @@
 package main
 
 func removeElements(head *ListNode, val int) *ListNode {
-	var root *ListNode
-	for root = head; root != nil && root.Val == val; root = root.Next {
-	}
+	root := &ListNode{}
+	root.Next = head
 	last := root
-	if root == nil {
-		return nil
-	}
-	for start := root.Next; start != nil; {
-		if start.Val == val {
-			n := start.Next
+	for c := root.Next; c != nil; {
+		if c.Val == val {
+			n := c.Next
 			last.Next = n
-			start = n
+			c = n
 		} else {
-			last = start
-			start = start.Next
+			last = c
+			c = c.Next
 		}
 	}
-	return root
+	return root.Next
 }

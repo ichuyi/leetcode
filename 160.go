@@ -10,25 +10,20 @@ type ListNode struct {
 }
 
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
-	if headA == nil || headB == nil {
-		return nil
+	pa, pb := headA, headB
+	for pa != pb {
+		if pa == nil {
+			pa = headB
+		} else {
+			pa = pa.Next
+		}
+		if pb == nil {
+			pb = headA
+		} else {
+			pb = pb.Next
+		}
 	}
-	return do(headA, headA, headB, headB)
-}
-func do(rootA, curA, rootB, curB *ListNode) *ListNode {
-	if curA == nil && curB == nil {
-		return nil
-	}
-	if curA == nil {
-		curA = rootB
-	}
-	if curB == nil {
-		curB = rootA
-	}
-	if curA == curB {
-		return curB.Next
-	}
-	return do(rootA, curA.Next, rootB, curB.Next)
+	return pa
 }
 func getIntersectionNode2(headA, headB *ListNode) *ListNode {
 	la, lb := 0, 0
