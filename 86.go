@@ -40,3 +40,23 @@ func partition(head *ListNode, x int) *ListNode {
 	}
 	return root
 }
+func partition2(head *ListNode, x int) *ListNode {
+	smallStart := &ListNode{}
+	smallEnd := smallStart
+	bigStart := &ListNode{}
+	bigEnd := bigStart
+	for cur := head; cur != nil; {
+		next := cur.Next
+		if cur.Val < x {
+			smallEnd.Next = cur
+			smallEnd = cur
+		} else {
+			bigEnd.Next = cur
+			bigEnd = cur
+		}
+		cur = next
+	}
+	bigEnd.Next = nil
+	smallEnd.Next = bigStart.Next
+	return smallStart.Next
+}
