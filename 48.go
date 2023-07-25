@@ -11,6 +11,7 @@ func rotate(matrix [][]int) {
 			matrix[end][end-j] = matrix[start+j][end]
 			matrix[j+start][end] = t
 		}
-		matrix[start][start], matrix[start][end], matrix[end][end], matrix[end][start] = matrix[end][start], matrix[start][start], matrix[start][end], matrix[end][end]
+		matrix[start][start], matrix[start][end], matrix[end][end], matrix[end][start] = matrix[end][start],
+			matrix[start][start], matrix[start][end], matrix[end][end]
 	}
 }

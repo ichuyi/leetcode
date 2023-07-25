@@ -43,11 +43,11 @@ func trap2(height []int) int {
 	return ans
 }
 func trap3(height []int) int {
-	left, right := 0, len(height)-1
-	leftMax, rightMax := 0, 0
+	left, right := 1, len(height)-2
+	leftMax, rightMax := height[left-1], height[right+1]
 	ans := 0
 	for left < right {
-		if height[left] < height[right] {
+		if leftMax < rightMax {
 			leftMax = max(leftMax, height[left])
 			ans += leftMax - height[left]
 			left++

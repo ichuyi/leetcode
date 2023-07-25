@@ -1,22 +1,20 @@
 package main
 
 func lengthOfLongestSubstring(s string) int {
-	window := make([]rune, 0)
-	set := make(map[rune]struct{})
-	max := 0
-	for _, v := range s {
-		_, ok := set[v]
-		for ok {
-			c := window[0]
-			delete(set, c)
-			window = window[1:]
-			_, ok = set[v]
+	window := make(map[rune]struct{})
+	start := 0
+	ans := 0
+	for i, v := range s {
+		for _, ok := window[v]; ok; _, ok = window[v] {
+			vv := s[start]
+			delete(window, rune(vv))
+			start++
 		}
-		window = append(window, v)
-		set[v] = struct{}{}
-		if max < len(window) {
-			max = len(window)
+		if _, ok := window[v]; !ok {
+			window[v] = struct{}{}
+			ans = max(ans, i-start+1)
+			continue
 		}
 	}
-	return max
+	return ans
 }

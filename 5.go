@@ -1,29 +1,31 @@
 package main
 
 func longestPalindrome(str string) string {
-	start, end := 0, 0
+	ans := ""
 	for i := 0; i < len(str); i++ {
-		s, e := f(str, i, i)
-		if e-s > end-start {
-			start, end = s, e
+		l, r := find(str, i, i)
+		if len(ans) < r-l {
+			ans = string(str[l:r])
 		}
-		if i < len(str)-1 && str[i] == str[i+1] {
-			s, e = f(str, i, i+1)
-			if e-s > end-start {
-				start, end = s, e
+		if i+1 < len(str) {
+			l, r = find(str, i, i+1)
+			if len(ans) < r-l {
+				ans = string(str[l:r])
 			}
 		}
+
 	}
-	return str[start : end+1]
+	return ans
 }
 
-func f(s string, i, j int) (int, int) {
-	if i <= 0 || j >= len(s)-1 {
-		return i, j
+// find 左闭右开
+func find(str string, l, r int) (int, int) {
+	for l >= 0 && r < len(str) {
+		if str[l] != str[r] {
+			return l + 1, r
+		}
+		l--
+		r++
 	}
-	if s[i-1] == s[j+1] {
-		return f(s, i-1, j+1)
-	} else {
-		return i, j
-	}
+	return l + 1, r
 }
