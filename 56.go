@@ -1,6 +1,8 @@
 package main
 
-import "sort"
+import (
+	"sort"
+)
 
 func merge56(intervals [][]int) [][]int {
 	sort.Slice(intervals, func(i, j int) bool {
@@ -21,4 +23,38 @@ func merge56(intervals [][]int) [][]int {
 	}
 	result = append(result, []int{left, right})
 	return result
+}
+
+func merge562(intervals [][]int) [][]int {
+	if len(intervals) == 0 {
+		return nil
+	}
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	ans := make([][]int, 0)
+	reset := true
+	start, end := 0, 0
+	for i := 0; i < len(intervals); {
+		cur := intervals[i]
+		if reset {
+			start, end = cur[0], cur[1]
+			reset = false
+			i++
+			continue
+		}
+		if end < cur[0] {
+			ans = append(ans, []int{start, end})
+			reset = true
+			continue
+		}
+		if cur[1] > end {
+			end = cur[1]
+		}
+		i++
+	}
+	if !reset {
+		ans = append(ans, []int{start, end})
+	}
+	return ans
 }
