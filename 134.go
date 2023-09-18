@@ -27,3 +27,25 @@ func canCompleteCircuit(gas []int, cost []int) int {
 	}
 	return -1
 }
+
+func canCompleteCircuit2(gas []int, cost []int) int {
+	start := 0
+	l := len(gas)
+	for start < l {
+		var i int
+		sum := gas[start]
+		for i = 0; i < l; i++ {
+			index := (start + i) % l
+			sum = sum - cost[index]
+			if sum < 0 {
+				break
+			}
+			sum += gas[(index+1)%l]
+		}
+		if i == l {
+			return start
+		}
+		start = start + i + 1
+	}
+	return -1
+}

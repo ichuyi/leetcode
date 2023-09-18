@@ -74,3 +74,34 @@ func copyRandomList2(head *ListNode) *ListNode {
 	printLinkedList(head)
 	return root
 }
+func copyRandomList3(head *Node) *Node {
+	if head == nil {
+		return nil
+	}
+	for root := head; root != nil; root = root.Next {
+		curCopy := &Node{
+			Val: root.Val,
+		}
+		next := root.Next
+		root.Next = curCopy
+		curCopy.Next = next
+		root = curCopy
+	}
+	for root := head; root != nil; root = root.Next {
+		curCopy := root.Next
+		if root.Random != nil {
+			curCopy.Random = root.Random.Next
+		}
+		root = curCopy
+	}
+	root := head.Next
+	curCopy := &Node{}
+	for cur := head; cur != nil; cur = cur.Next {
+		copyNext := cur.Next
+		next := copyNext.Next
+		cur.Next = next
+		curCopy.Next = copyNext
+		curCopy = copyNext
+	}
+	return root
+}
